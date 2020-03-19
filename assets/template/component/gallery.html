@@ -1,0 +1,79 @@
+<link rel="stylesheet" href="./../../static/css/style.css" xmlns:background-color="http://www.w3.org/1999/xhtml">
+<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+<meta charset="utf-8">
+
+<script>
+    $('.grid').masonry({
+        // options
+        itemSelector: '.grid-item',
+        columnWidth: 200
+    });
+</script>
+
+<div class="d-flex justify-content-center">
+    <div class="grid">
+        <div class="grid-item mr-4 ml-4">
+            <div class="card" style="width:17rem">
+                <div class="card-header">
+                    <div class="container d-flex justify-content-center">
+                        <div class="row">
+                            <div class="col">Date</div>
+                            -
+                            <div class="col">Time</div>
+                        </div>
+                    </div>
+                </div>
+                <img src="https://i.pinimg.com/564x/d3/11/c2/d311c26119591a71618e25fae494399f.jpg" class="card-img-top" alt="...">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col"><i class="fa fa-heart" aria-hidden="true" style="color:#feba2e"></i></div>
+                            <div class="col mr-3"><strong>2</strong></div>
+                            <div class="col ml-3"><i class="fa fa-comment" aria-hidden="true" style="color:#feba2e"></i>
+                            </div>
+                            <div class="col"><strong>2</strong></div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <form action="">
+                            <button class="btn btn-outline-warning btn-block">
+                                <i class="fa fa-trash-o" aria-hidden="true"></i> Löschen
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+            <div class="grid-item mr-4 ml-4">
+                <div class="card" style="width:17rem">
+                    <div class="card-header">
+                        <div class="container d-flex justify-content-center">
+                            <div class="row">
+                                <div class="col">Date</div>
+                                -
+                                <div class="col">Time</div>
+                            </div>
+                        </div>
+                    </div>
+                    <img src="https://i.pinimg.com/564x/d3/11/c2/d311c26119591a71618e25fae494399f.jpg" class="card-img-top" alt="...">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col"><i class="fa fa-heart" aria-hidden="true" style="color:#feba2e"></i></div>
+                                <div class="col mr-3"><strong>2</strong></div>
+                                <div class="col ml-3"><i class="fa fa-comment" aria-hidden="true" style="color:#feba2e"></i>
+                                </div>
+                                <div class="col"><strong>2</strong></div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <form action="">
+                                <button class="btn btn-outline-warning btn-block">
+                                    <i class="fa fa-trash-o" aria-hidden="true"></i> Löschen
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+        </div>
+    </div>
+</div>
