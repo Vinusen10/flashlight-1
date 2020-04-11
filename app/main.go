@@ -1,15 +1,20 @@
 package main
 
 import (
+	"flashlight/app/route"
 	"log"
 	"net/http"
+	"time"
 )
 
-func main(){
-
+func main() {
 
 	server := &http.Server{
-		Addr:"localhost:8000",
+		Addr:           "localhost:8000",
+		Handler:        route.GetRouter(),
+		ReadTimeout:    10 * time.Second,
+		WriteTimeout:   10 * time.Second,
+		MaxHeaderBytes: 1 << 20,
 	}
 	log.Fatal(server.ListenAndServe())
 
