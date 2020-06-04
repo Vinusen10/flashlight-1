@@ -10,12 +10,12 @@ import (
 func main() {
 
 	server := &http.Server{
-		Addr:           "localhost:8000",
+		Addr:           ":80",
 		Handler:        route.GetRouter(),
 		ReadTimeout:    10 * time.Second,
 		WriteTimeout:   10 * time.Second,
 		MaxHeaderBytes: 1 << 20,
 	}
-	log.Fatal(server.ListenAndServe())
 
+	log.Fatal(server.ListenAndServe())
 }
