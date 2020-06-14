@@ -6,3 +6,4 @@ github.com/gorilla/sessions v1.2.0 h1:S7P+1Hm5V/AT9cjEcUD5uDaQSX0OE577aCXgoaKpYb
 github.com/gorilla/sessions v1.2.0/go.mod h1:dk2InVEVJ0sfLlnXv9EAgkf6ecYs/i80K/zI+bUmuGM=
 github.com/leesper/couchdb-golang v1.2.1 h1:FqSaTxxT2mVRLbxGQVkZakRRoSzWhPmV8UEKYjA/GWc=
 github.com/leesper/couchdb-golang v1.2.1/go.mod h1:OU3FDAM3mazHx15oi8Hm+egTMneBUqepwnh0LuBSH54=
+gogithub.com/gorilla/mux v1.7.4 h1:VuZ8uybHlWmqV03+zRzdwKL4tUnIp1MAQtp1mIFE1bc=

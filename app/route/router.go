@@ -16,6 +16,7 @@ func GetRouter() *mux.Router {
 	r.HandleFunc("/gallery", controller.Gallery)
 	r.HandleFunc("/", controller.Logged)
 	r.HandleFunc("/uploads", controller.Upload)
+	r.HandleFunc()
 
 	//statics
 	r.PathPrefix("/static/").Handler(http.StripPrefix("static", http.FileServer(http.Dir("./assets/template/pages"))))
