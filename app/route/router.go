@@ -6,22 +6,20 @@ import (
 	"net/http"
 )
 
+//GetRouter is a router that routes requests to their controller
 func GetRouter() *mux.Router {
 	r := mux.NewRouter()
 
 	//controllers
-	r.HandleFunc("", controller.Index)
+	r.HandleFunc("/", controller.Index)
 	r.HandleFunc("/login", controller.Login)
 	r.HandleFunc("/register", controller.Register)
 	r.HandleFunc("/gallery", controller.Gallery)
 	r.HandleFunc("/", controller.Logged)
 	r.HandleFunc("/uploads", controller.Upload)
-	r.HandleFunc()
 
 	//statics
-	r.PathPrefix("/static/").Handler(http.StripPrefix("static", http.FileServer(http.Dir("./assets/template/pages"))))
-	r.PathPrefix("/css/").Handler(http.StripPrefix("/css", http.FileServer(http.Dir("./assets/static/css"))))
-	r.PathPrefix("/img/").Handler(http.StripPrefix("/css", http.FileServer(http.Dir("./assets/static/ressource/img"))))
+	r.PathPrefix("/static/").Handler(http.StripPrefix("/static", http.FileServer(http.Dir("./static/"))))
 
 	return r
 }
