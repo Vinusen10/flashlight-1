@@ -8,8 +8,14 @@ import (
 
 func Index(w http.ResponseWriter, r *http.Request) {
 	t, err := template.ParseFiles("template/index.html", "template/components/box.html", "template/components/landingHeader.html")
-	log.Println(err)
-	t.ExecuteTemplate(w, "layout", nil)
-	//MockData
+	if err != nil {
+		log.Println(err)
+	}
+
+	//Mockdata
+	type Box struct {
+	}
+
+	t.ExecuteTemplate(w, "layout", Box{})
 
 }

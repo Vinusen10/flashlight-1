@@ -16,12 +16,13 @@ type (
 	}
 
 	Picture struct {
-		ID       string   `json:"_id"`
-		Rev      string   `json:"_rev"`
-		Type     string   `json:"type"`
-		Creator  string   `json:"creator"`
-		Comments []string `json:"comment"`
-		Image    []byte   `json:"img"`
+		ID        string   `json:"_id"`
+		Rev       string   `json:"_rev"`
+		Type      string   `json:"type"`
+		Creator   string   `json:"creator"`
+		Comments  []string `json:"comment"`
+		Timestamp int      `json:"timestamp"`
+		Image     []byte   `json:"img"`
 		couchdb.Document
 	}
 )

@@ -7,8 +7,10 @@ import (
 )
 
 func Login(w http.ResponseWriter, r *http.Request) {
-	t, err := template.ParseFiles("template/index.html", "template/components/login.html")
-	log.Println(err)
+	t, err := template.ParseFiles("template/index-login.html", "template/components/login.html")
+	if err != nil {
+		log.Println(err)
+	}
 	t.ExecuteTemplate(w, "layout", nil)
 	//MockData
 }
