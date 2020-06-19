@@ -11,11 +11,12 @@ func GetRouter() *mux.Router {
 	r := mux.NewRouter()
 
 	//controllers
+
 	r.HandleFunc("/", controller.Index)
 	r.HandleFunc("/login", controller.Login)
 	r.HandleFunc("/register", controller.Register)
 	r.HandleFunc("/gallery", controller.Gallery)
-	r.HandleFunc("/", controller.Logged)
+	r.HandleFunc("/logged", controller.Logged)
 	r.HandleFunc("/uploads", controller.Upload)
 
 	//statics

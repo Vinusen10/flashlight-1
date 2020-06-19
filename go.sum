@@ -1,5 +1,7 @@
 gigothub.com/gorilla/mux v1.7.4 h1:VuZ8uybHlWmqV03+zRzdwKL4tUnIp1MAQtp1mIFE1bc=
 github.com/gorilla/mux v1.7.4 h1:VuZ8uybHlWmqV03+zRzdwKL4tUnIp1MAQtp1mIFE1bc=
 github.com/gorilla/mux v1.7.4/go.mod h1:DVbg23sWSpFRCP0SfiEN6jmj59UnW/n46BH5rLB71So=
+github.com/gorilla/schema v1.1.0 h1:CamqUDOFUBqzrvxuz2vEwo8+SUdwsluFh7IlzJh30LY=
+github.com/gorilla/schema v1.1.0/go.mod h1:kgLaKoK1FELgZqMAVxx/5cbj0kT+57qxUrAlIO2eleU=
 github.com/leesper/couchdb-golang v1.2.1 h1:FqSaTxxT2mVRLbxGQVkZakRRoSzWhPmV8UEKYjA/GWc=
 github.com/leesper/couchdb-golang v1.2.1/go.mod h1:OU3FDAM3mazHx15oi8Hm+egTMneBUqepwnh0LuBSH54=

@@ -22,7 +22,8 @@ type (
 		Creator   string   `json:"creator"`
 		Comments  []string `json:"comment"`
 		Timestamp int      `json:"timestamp"`
-		Image     []byte   `json:"img"`
+		//TODO: Image Path?
+		Image []byte `json:"img"`
 		couchdb.Document
 	}
 )

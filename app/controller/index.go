@@ -13,9 +13,7 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	}
 
 	//Mockdata
-	type Box struct {
-	}
 
-	t.ExecuteTemplate(w, "layout", Box{})
+	t.ExecuteTemplate(w, "layout", nil)
 
 }
