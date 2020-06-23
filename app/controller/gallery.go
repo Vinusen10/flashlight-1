@@ -7,10 +7,17 @@ import (
 )
 
 func Gallery(w http.ResponseWriter, r *http.Request) {
-	t, err := template.ParseFiles("template/index-gallrey.html", "template/components/gallery.html")
-	if err != nil {
-		log.Println(err)
+	if r.Method == "GET" {
+		t, err := template.ParseFiles("template/index-gallrey.html", "template/components/gallery.html", "template/components/card.html")
+		if err != nil {
+			log.Println(err)
+		}
+		t.ExecuteTemplate(w, "layout", nil)
+	} else {
+
 	}
-	t.ExecuteTemplate(w, "layout", nil)
+}
+
+func DeletePicture(w http.ResponseWriter, r *http.Request) {
 
 }

@@ -6,14 +6,20 @@ import (
 	"net/http"
 )
 
-func Login(w http.ResponseWriter, r *http.Request) {
-	if r.Method == "GET" {
-		t, err := template.ParseFiles("template/index-login.html", "template/components/login.html")
-		if err != nil {
-			log.Println(err)
-		}
-		//MockData
-		t.ExecuteTemplate(w, "layout", nil)
+func LoginPage(w http.ResponseWriter, r *http.Request) {
+	t, err := template.ParseFiles("template/index-login.html", "template/components/login.html")
+	if err != nil {
+		log.Println(err)
 	}
+	//MockData
+	t.ExecuteTemplate(w, "layout", nil)
+}
+
+func Login(w http.ResponseWriter, r *http.Request) {
+	//Authenication + Login-Process
+	http.Redirect(w, r, "/logged", http.StatusFound)
+}
+
+func Like(w http.ResponseWriter, r *http.Request) {
 
 }

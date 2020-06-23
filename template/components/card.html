@@ -1,26 +1,32 @@
 {{define "card-layout"}}
+
     <div class="card" style="width: 18rem;">
-        <div class="card-header" style="background-color:white">
-            <ul class="list-inline text-center text-muted mt-n1 mb-n1">
-                <li class="list-inline-item"><small>Date</small></li>
-                <li class="list-inline-item"><small>-</small></li>
-                <li class="list-inline-item"><small>Time</small></li>
-            </ul>
-        </div>
-        <img class="card-img-top" src="https://images.ctfassets.net/hrltx12pl8hq/4SJm4sFXELd11MiTmmJoRu/9a3c7186c5fab4585c532ca7b9a5f3db/offset_comp_209641_copy.jpg" alt="Card image cap">
-        <div class="card-body">
-            <ul class="list-inline text-center mb-n1 ">
-                <li class="list-inline-item">
-                    <i class="fa fa-heart" aria-hidden="true" style="color:#feba2e"></i></li>
-                <li class="list-inline-item"><strong>2</strong></li>
-                <li class="list-inline-item ml-5 mr-5"></li>
-                <li class="list-inline-item">
-                    <i class="fa fa-comment" aria-hidden="true" style="color:#feba2e"></i></li>
-                <li class="list-inline-item"><strong>2</strong></li>
-            </ul>
-        </div>
-        <div class="card-footer" style="background-color:white">
-            <a href="#" class="btn btn-outline-warning btn-block"><i class="fa fa-trash" aria-hidden="true" style="color:#feba2e"></i>Löschen</a>
-        </div>
+        <form id="" action="/logged" method="post">
+            <div class="card-header" style="background-color:white">
+                <ul class="list-inline text-center text-muted mt-n1 mb-n1">
+                    <li class="list-inline-item"><small>Date</small></li>
+                    <li class="list-inline-item"><small>-</small></li>
+                    <li class="list-inline-item"><small>Time</small></li>
+                </ul>
+            </div>
+            <img class="card-img-top" src="https://images.ctfassets.net/hrltx12pl8hq/4SJm4sFXELd11MiTmmJoRu/9a3c7186c5fab4585c532ca7b9a5f3db/offset_comp_209641_copy.jpg" alt="Card image cap">
+            <div class="card-body">
+                <ul class="list-inline text-center mb-n1 ">
+                    <li class="list-inline-item">
+                        <i class="fa fa-heart" aria-hidden="true" style="color:#feba2e"></i></li>
+                    <li class="list-inline-item"><strong>2</strong></li>
+                    <li class="list-inline-item ml-5 mr-5"></li>
+                    <li class="list-inline-item">
+                        <i class="fa fa-comment" aria-hidden="true" style="color:#feba2e"></i></li>
+                    <li class="list-inline-item"><strong>2</strong></li>
+                </ul>
+            </div>
+            <div class="card-footer" style="background-color:white">
+                <button type="submit" class="btn btn-outline-warning btn-block">
+                    <i class="fa fa-trash" aria-hidden="true" style="color:#feba2e"></i>Löschen
+                </button>
+            </div>
+        </form>
     </div>
+
 {{end}}

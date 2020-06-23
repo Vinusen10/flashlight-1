@@ -2,12 +2,16 @@ package model
 
 import "github.com/leesper/couchdb-golang"
 
-var btDB *couchdb.Database
+var (
+	userFlashlightDB, imageFlashlightDB *couchdb.Database
+)
 
-func init(){
+func init() {
 	var err error
-	btDB, err = couchdb.NewDatabase("http://localhost:5984/sportsmap")
-	if err!=nil {
+	userFlashlightDB, err = couchdb.NewDatabase("http://localhost:5984/sportsmap")
+	imageFlashlightDB, err = couchdb.NewDatabase("")
+	if err != nil {
 		panic(err)
 	}
+
 }
