@@ -1,22 +1,31 @@
 {{define "upload"}}
     <div class="container">
         <div class="row">
-            <form class="col-md-6 offset-md-3">
+            <form class="col-md-6 offset-md-3" method="post" action="/uploading" id="formUp">
                 <div class="form-group">
-                    <label for="exampleFormControlFile1">
+                    <label>
                         <div class="m-2"><strong>E-Mail</strong></div>
                         <div class="m-2">Hier kansnt du ein neues Bild hochladen.</div>
                     </label>
-                    <span class="m-2"><input type="file" class="form-control-file" id="exampleFormControlFile1"></span>
-                    <span class="m-2"><textarea class="form-control" style="border-color:#feba2e" aria-label="Beschreibung"></textarea></span>
-                    <div class="col-md-7 offset-md-3 ">
-                        <button type="submit" class="btn btn-warning btn-block">
-                            <span style="color:white">Hochladen</span></button>
+                    <div>
+                        <input name="image" type="file" class="form-control-file m-2"  form="formUp" accept="image/*">
+                    </div>
+                    <div>
+                        <textarea name="caption" class="form-control" style="border-color:#feba2e" aria-label="Beschreibung" form="formUp"></textarea>
+                    </div>
+                    <div class="col-md-7 offset-md-3">
+                        <div class="m-2">
+                            <button type="submit" class="btn btn-warning btn-block">
+                                <span style="color:white">Hochladen</span>
+                            </button>
+                        </div>
+
                     </div>
                 </div>
-
             </form>
         </div>
 
     </div>
+
+
 {{end}}

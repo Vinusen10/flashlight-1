@@ -12,5 +12,8 @@ func Upload(w http.ResponseWriter, r *http.Request) {
 		log.Println(err)
 	}
 	t.ExecuteTemplate(w, "layout", nil)
+}
 
+func Uploading(w http.ResponseWriter, r *http.Request) {
+	http.Redirect(w, r, "/uploads", http.StatusFound)
 }

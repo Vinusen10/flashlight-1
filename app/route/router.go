@@ -23,8 +23,9 @@ func GetRouter() *mux.Router {
 	r.HandleFunc("/register-process", controller.Register).Methods("POST")
 	r.HandleFunc("/gallery", controller.Gallery).Methods("GET")
 	r.HandleFunc("/deletePicture", controller.DeletePicture).Methods("POST")
-	r.HandleFunc("/logged", controller.Logged)
-	r.HandleFunc("/uploads", controller.Upload)
+	r.HandleFunc("/logged", controller.Logged) //TODO
+	r.HandleFunc("/uploading", controller.Uploading)
+	r.HandleFunc("/uploads", controller.Upload).Methods("GET")
 
 	//statics
 	r.PathPrefix("/static/").Handler(http.StripPrefix("/static", http.FileServer(http.Dir("./static/"))))
