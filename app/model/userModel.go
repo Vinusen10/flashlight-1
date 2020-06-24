@@ -18,16 +18,18 @@ func AddUser() {
 
 }
 
+// At the moment, there is no use case for this function
 func DeleteUser() {
 
 }
 
-func GetUserbyUsername() {
+func GetUserbyUsername(username string) (user User, err error) {
 
+	return
 }
 
-func UserExist() {
-
+func UserExist(username string) (status bool, err error) {
+	return
 }
 
 func checkPassword() {

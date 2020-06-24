@@ -18,9 +18,11 @@
                         <div class="card-text"><small class="text-muted">Last updated 3 mins ago</small></div>
                     </div>
                     <div class="col-lg-3 col-md-1">
-                        <button class="btn btn-outline-warning btn-lg btn-block" id="uniqueID" onclick="toggleLikeButton('uniqueID')" formaction="/like" type="submit">
+                        <form>
+                        <button class="btn btn-outline-warning btn-lg btn-block" id="uniqueID" onclick="toggleLikeButton('uniqueID')" formaction="/like" type="submit" form="">
                             <i class="fa fa-heart"></i>
                         </button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -66,8 +68,10 @@
         </div>
     </div>
     <script>
-        function toggleLikeButton(id) {
-            document.getElementById(id).classList.toggle('btn-outline-warning-toggle')
+        function toggleLikeButton(buttonId) {
+            document.getElementById(buttonId).classList.toggle('btn-outline-warning-toggle')
+
         }
+
     </script>
 {{end}}

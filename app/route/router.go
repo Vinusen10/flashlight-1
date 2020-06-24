@@ -11,7 +11,6 @@ func GetRouter() *mux.Router {
 	r := mux.NewRouter()
 
 	//controllers
-
 	r.HandleFunc("/", controller.Index).Methods("GET")
 	r.HandleFunc("/sendComment", controller.SendComment).Methods("POST")
 	r.HandleFunc("/like", nil).Methods("POST")
@@ -29,6 +28,7 @@ func GetRouter() *mux.Router {
 
 	//statics
 	r.PathPrefix("/static/").Handler(http.StripPrefix("/static", http.FileServer(http.Dir("./static/"))))
+	//See all files on server
 	r.PathPrefix("/files/").Handler(http.StripPrefix("/files", http.FileServer(http.Dir("."))))
 
 	return r
