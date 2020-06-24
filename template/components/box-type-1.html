@@ -3,6 +3,7 @@
         .btn-outline-warning:hover {
             color: white;
         }
+
         .btn-outline-warning-toggle {
             color: white;
             background-color: #feba2e;
@@ -19,9 +20,9 @@
                     </div>
                     <div class="col-lg-3 col-md-1">
                         <form>
-                        <button class="btn btn-outline-warning btn-lg btn-block" id="uniqueID" onclick="toggleLikeButton('uniqueID')" formaction="/like" type="submit" form="">
-                            <i class="fa fa-heart"></i>
-                        </button>
+                            <button class="btn btn-outline-warning btn-lg btn-block" id="uniqueID" onclick="toggleLikeButton('uniqueID')" formaction="/like" type="submit" form="">
+                                <i class="fa fa-heart"></i>
+                            </button>
                         </form>
                     </div>
                 </div>
@@ -70,8 +71,6 @@
     <script>
         function toggleLikeButton(buttonId) {
             document.getElementById(buttonId).classList.toggle('btn-outline-warning-toggle')
-
         }
-
     </script>
 {{end}}

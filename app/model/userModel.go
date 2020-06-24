@@ -1,14 +1,17 @@
 package model
 
-import "github.com/leesper/couchdb-golang"
+import (
+	"encoding/json"
+	"github.com/leesper/couchdb-golang"
+)
 
 type User struct {
 	ID       string `json:"_id"`
 	Rev      string `json:"_rev"`
 	Type     string `json:"type"`
-	Username string `json:"name"`
 	Password string `json:"password"`
-	Email    string `json:"email"`
+	Username string `json:"username"`
+	Mail     string `json:"mail"`
 
 	couchdb.Document
 }
@@ -18,20 +21,38 @@ func AddUser() {
 
 }
 
-// At the moment, there is no use case for this function
-func DeleteUser() {
-
-}
-
-func GetUserbyUsername(username string) (user User, err error) {
+func GetUserbyMail(mailUsername string) (user User, err error) {
 
 	return
 }
 
-func UserExist(username string) (status bool, err error) {
+func UserExist(mailUsername string) (status bool, err error) {
 	return
+}
+
+/* Converts Mail to Usernamr : E.G Bylat93 -> [Bylat93]@examplemail.com
+ */
+func MailToUsername(mail string) {
+
 }
 
 func checkPassword() {
 
+}
+
+/*****Helper Functions****/
+
+// Convert from map[string]interface{} to User Struct as required by golang-couchdb method
+func map2User(user map[string]interface{}) (u User, err error) {
+	uJSON, err := json.Marshal(user)
+	json.Unmarshal(uJSON, &u)
+
+	return u, err
+}
+
+// Convert from User Struct to map[string]interface{}  as required by golang-couchdb method
+func user2Map(u User) (user map[string]interface{}, err error) {
+	uJSON, err := json.Marshal(u)
+	json.Unmarshal(uJSON, &user)
+	return user, err
 }

@@ -21,5 +21,5 @@ func RegisterPage(w http.ResponseWriter, r *http.Request) {
 
 }
 func Register(w http.ResponseWriter, r *http.Request) {
-
+	http.Redirect(w, r, "/", http.StatusFound)
 }
