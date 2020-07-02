@@ -16,10 +16,6 @@ func LoginPage(w http.ResponseWriter, r *http.Request) {
 }
 
 func Login(w http.ResponseWriter, r *http.Request) {
-	//Authenication + Login-Process
-	http.Redirect(w, r, "/logged", http.StatusFound)
-}
 
-func Like(w http.ResponseWriter, r *http.Request) {
-
+	//
 }

@@ -35,8 +35,8 @@ func MailToUsername(mail string) {
 
 }
 
-func checkPassword() {
-
+func CheckPassword(pw string) (status bool, err error) {
+	return
 }
 
 /*-------Helper Function--------*/
