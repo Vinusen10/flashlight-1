@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"flashlight/app/model"
 	"html/template"
 	"log"
 	"net/http"
@@ -12,7 +13,13 @@ func Gallery(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			log.Println(err)
 		}
-		t.ExecuteTemplate(w, "layout", nil)
+		data, _ := model.GetPostsbyUser("Justus Jonas")
+		gallery := struct {
+			MyPosts []map[string]interface{}
+		}{
+			MyPosts: data,
+		}
+		t.ExecuteTemplate(w, "layout", gallery)
 	} else {
 
 	}

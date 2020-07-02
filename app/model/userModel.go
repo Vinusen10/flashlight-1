@@ -12,7 +12,6 @@ type User struct {
 	Password string `json:"password"`
 	Username string `json:"username"`
 	Mail     string `json:"mail"`
-
 	couchdb.Document
 }
 
@@ -40,13 +39,12 @@ func checkPassword() {
 
 }
 
-/*****Helper Functions****/
+/*-------Helper Function--------*/
 
 // Convert from map[string]interface{} to User Struct as required by golang-couchdb method
 func map2User(user map[string]interface{}) (u User, err error) {
 	uJSON, err := json.Marshal(user)
 	json.Unmarshal(uJSON, &u)
-
 	return u, err
 }
 
