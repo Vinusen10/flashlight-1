@@ -3,13 +3,13 @@
         Bitte gebe Sie ihre Zugangsdaten ein.
     </div>
     <div class="container d-flex justify-content-center">
-        <form action="/login-process" class="col-md-5" method="post">
+        <form action="/login" class="col-md-5" method="post">
 
             <div class="form-group">
-                <input type="text" class="form-control form-control-small " id="username" placeholder="Benutzername" style="border-color:#feba2e">
+                <input type="text" name="username" class="form-control form-control-small " id="username" placeholder="Benutzername" style="border-color:#feba2e">
             </div>
             <div class="form-group">
-                <input type="password" class="form-control form-control-small" id="password" placeholder="Passwort" style="border-color:#feba2e">
+                <input type="password" name="password" class="form-control form-control-small" id="password" placeholder="Passwort" style="border-color:#feba2e">
             </div>
 
             <div class="m-5">
@@ -17,7 +17,4 @@
             </div>
         </form>
     </div>
-    <script>
-        {{/* Password check */}}
-    </script>
 {{end}}

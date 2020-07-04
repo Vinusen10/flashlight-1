@@ -12,19 +12,21 @@ func GetRouter() *mux.Router {
 
 	//controllers
 	r.HandleFunc("/", controller.Index).Methods("GET")
+
+	//REST Controller for Sending, Liking, Deleting Posts,Uploading
 	r.HandleFunc("/sendComment", controller.SendComment).Methods("POST")
 	r.HandleFunc("/like", nil).Methods("POST")
-	r.HandleFunc("/login", controller.LoginPage).Methods("GET")
-	r.HandleFunc("/login-process", controller.Login).Methods("POST")
-	r.HandleFunc("/logout", controller.Logout).Methods("POST")
-	r.HandleFunc("/register", controller.RegisterPage).Methods("GET")
-	r.HandleFunc("/register-process", controller.Register).Methods("POST")
-	r.HandleFunc("/gallery", controller.Gallery).Methods("GET")
 	r.HandleFunc("/deletePicture", controller.DeletePicture).Methods("POST")
-	r.HandleFunc("/logged", controller.Logged) // TODO
 	r.HandleFunc("/uploading", controller.Uploading).Methods("POST")
+	r.HandleFunc("/registerProcess", controller.RegisterProcess).Methods("POST")
+
+	r.HandleFunc("/login", controller.Login)
+	r.HandleFunc("/logout", controller.Logout)
+	r.HandleFunc("/register", controller.RegisterPage)
+	r.HandleFunc("/gallery", controller.Gallery).Methods("GET")
 	r.HandleFunc("/uploads", controller.Upload).Methods("GET")
 
+	/*File Server & CND */
 	//statics
 	r.PathPrefix("/static/").Handler(http.StripPrefix("/static", http.FileServer(http.Dir("./static/"))))
 	//See all files on server
