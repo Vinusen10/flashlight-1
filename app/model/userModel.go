@@ -51,9 +51,9 @@ func (u User) AddUser() (err error) {
 
 }
 
-func GetUserbyMail(mailUsername string) (user User, err error) {
+func GetUserByMail(mailUsername string) (user User, err error) {
 
-	return
+	return user, err
 }
 
 func UserExist(mailUsername string) bool {
@@ -71,7 +71,7 @@ func UserExist(mailUsername string) bool {
 }
 
 func CheckPassword(username, pw string) bool {
-	user, err := GetUserbyMail(username)
+	user, err := GetUserByMail(username)
 	passwordDB, _ := base64.StdEncoding.DecodeString(user.Password)
 	err = bcrypt.CompareHashAndPassword(passwordDB, []byte(pw))
 	if err == nil {

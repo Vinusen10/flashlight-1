@@ -24,5 +24,4 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	}
 
 	t.ExecuteTemplate(w, "layout", indexData)
-
 }
