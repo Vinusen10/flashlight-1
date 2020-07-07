@@ -48,23 +48,34 @@ func (u User) AddUser() (err error) {
 	}
 
 	return err
-
 }
 
 func GetUserByMail(mailUsername string) (user User, err error) {
+	query := `{
+		"selector": {
+			 "type": "User",
+			 "mail": "%s"
+		}
+	}`
+	u, err := flashlightDB.QueryJSON(fmt.Sprintf(query, mailUsername))
 
-	return user, err
+	user, err = map2User(u)
+	if err != nil {
+		return User{}, err
+	}
+
+	return user, nil
 }
 
 func UserExist(mailUsername string) bool {
 	query := `{
 		"selector": {
 			 "type": "User",
-			 "email": "%s"
+			 "mail": "%s"
 		}
 	}`
 	u, _ := flashlightDB.QueryJSON(fmt.Sprintf(query, mailUsername))
-	if len(u) < 1 {
+	if len(u) >= 1 {
 		return false
 	}
 	return true
@@ -74,7 +85,7 @@ func CheckPassword(username, pw string) bool {
 	user, err := GetUserByMail(username)
 	passwordDB, _ := base64.StdEncoding.DecodeString(user.Password)
 	err = bcrypt.CompareHashAndPassword(passwordDB, []byte(pw))
-	if err == nil {
+	if err != nil {
 		return true
 	} else {
 		return false
@@ -83,14 +94,15 @@ func CheckPassword(username, pw string) bool {
 
 /* Converts Mail to Usernamr : E.G Bylat93 -> [Bylat93]@examplemail.com
  */
-func MailToUsername(mail string) {
-
+func MailToUsername(mail string) string {
+	//TODO
+	return ""
 }
 
 /*-------Helper Function--------*/
 
 // Convert from map[string]interface{} to User Struct as required by golang-couchdb method
-func map2User(user map[string]interface{}) (u User, err error) {
+func map2User(user []map[string]interface{}) (u User, err error) {
 	uJSON, err := json.Marshal(user)
 	json.Unmarshal(uJSON, &u)
 	return u, err

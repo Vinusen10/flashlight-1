@@ -2,11 +2,9 @@ package controller
 
 import (
 	"crypto/rand"
-	"encoding/base64"
 	"flashlight/app/model"
+	"fmt"
 	"github.com/gorilla/sessions"
-	"golang.org/x/crypto/bcrypt"
-
 	"html/template"
 	"log"
 	"net/http"
@@ -32,16 +30,11 @@ func AuthenticateUser(w http.ResponseWriter, r *http.Request) {
 	username := r.FormValue("username")
 	password := r.FormValue("password")
 
-	// Authentication
-	user, _ := model.GetUserByMail(username)
-
-	// decode base64 String to []byte
-	passwordDB, _ := base64.StdEncoding.DecodeString(user.Password)
-	err := bcrypt.CompareHashAndPassword(passwordDB, []byte(password))
-
-	if err == nil {
+	// checking password
+	check := model.CheckPassword(username, password)
+	fmt.Println(check)
+	if check == true {
 		session, _ := store.Get(r, "session")
-
 		// Set user as authenticated
 		session.Values["authenticated"] = true
 		session.Values["username"] = username
@@ -52,9 +45,6 @@ func AuthenticateUser(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			log.Fatal(err)
 		}
-		errData := struct {
-			Error string
-		}{}
-		t.ExecuteTemplate(w, "index-login.html", errData)
+		t.ExecuteTemplate(w, "index-login.html", nil)
 	}
 }

@@ -1,26 +1,12 @@
 package controller
 
 import (
-	"flashlight/app/model"
-	"html/template"
 	"log"
 	"net/http"
 )
 
-func Logged(w http.ResponseWriter, r *http.Request) {
-	t, err := template.ParseFiles("template/index-logged.html", "template/components/logged.html", "template/components/box.html")
-	if err != nil {
-		log.Println(err)
-	}
+func Like(w http.ResponseWriter, r *http.Request) {
 
-	allPosts, _ := model.GetAllPosts()
-
-	data := struct {
-		Posts []map[string]interface{}
-	}{
-		Posts: allPosts,
-	}
-	t.ExecuteTemplate(w, "layout", data)
 }
 
 func SendComment(w http.ResponseWriter, r *http.Request) {

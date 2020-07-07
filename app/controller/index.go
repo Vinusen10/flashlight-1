@@ -8,20 +8,36 @@ import (
 )
 
 func Index(w http.ResponseWriter, r *http.Request) {
-	t, err := template.ParseFiles("template/index.html", "template/components/box.html", "template/components/landingHeader.html")
-	if err != nil {
-		log.Println(err)
+	session, _ := store.Get(r, "session")
+	// Check if user is authenticated
+	if auth, ok := session.Values["authenticated"].(bool); !ok || !auth {
+		t, err := template.ParseFiles("template/index.html", "template/components/box.html", "template/components/landingHeader.html")
+		if err != nil {
+			log.Println(err)
+		}
+
+		allPosts, _ := model.GetAllPosts()
+
+		indexData := struct {
+			Posts []map[string]interface{}
+		}{
+			Posts: allPosts,
+		}
+		t.ExecuteTemplate(w, "layout", indexData)
+	} else {
+		t, err := template.ParseFiles("template/index-logged.html", "template/components/logged.html", "template/components/auth-user-box.html")
+		if err != nil {
+			log.Println(err)
+		}
+
+		allPosts, _ := model.GetAllPosts()
+
+		loggedData := struct {
+			Posts []map[string]interface{}
+		}{
+			Posts: allPosts,
+		}
+		t.ExecuteTemplate(w, "layout", loggedData)
 	}
 
-	allPosts, _ := model.GetAllPosts()
-	likes := 666
-	indexData := struct {
-		Posts []map[string]interface{}
-		Likes int
-	}{
-		Posts: allPosts,
-		Likes: likes,
-	}
-
-	t.ExecuteTemplate(w, "layout", indexData)
 }

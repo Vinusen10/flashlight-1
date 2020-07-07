@@ -23,15 +23,27 @@ func RegisterPage(w http.ResponseWriter, r *http.Request) {
 }
 func RegisterProcess(w http.ResponseWriter, r *http.Request) {
 
-	username := r.FormValue("username")
+	usermail := r.FormValue("username")
 	password := r.FormValue("password")
 
-	if model.UserExist(username) != true {
+	if model.UserExist(usermail) != true {
 		t, err := template.ParseFiles("template/index-register.html", "template/components/register.html")
 		if err != nil {
 			log.Println(err)
 		}
 		t.ExecuteTemplate(w, "layout", nil)
+	} else {
+		username := model.MailToUsername(usermail)
+		u := model.User{}
+		u.Password = password
+		u.Mail = usermail
+		u.Username = username
+
+		err := u.AddUser()
+		if err != nil {
+			log.Println(err)
+		}
+		http.Redirect(w, r, "/", http.StatusFound)
 	}
 
 }

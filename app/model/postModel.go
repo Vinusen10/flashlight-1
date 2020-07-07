@@ -53,14 +53,6 @@ func GetPostsbyUser(user string) ([]map[string]interface{}, error) {
 }
 
 func AppendComment(id, comment, user string) {
-	query := `{
-		"selector": {
-			"type": "post",
-				"_id": "%s"
-		}
-	}`
-	u, _ := flashlightDB.QueryJSON(fmt.Sprintf(query, id))
-
 }
 func AppendLike() {
 
