@@ -3,10 +3,12 @@ package model
 import (
 	"encoding/base64"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"github.com/leesper/couchdb-golang"
 	"golang.org/x/crypto/bcrypt"
 	"log"
+	"strings"
 )
 
 type User struct {
@@ -51,16 +53,20 @@ func (u User) AddUser() (err error) {
 }
 
 func GetUserByMail(mailUsername string) (user User, err error) {
+	if mailUsername == "" {
+		return User{}, errors.New("no username provided")
+	}
 	query := `{
 		"selector": {
-			 "type": "User",
+			 "type": "user",
 			 "mail": "%s"
 		}
 	}`
 	u, err := flashlightDB.QueryJSON(fmt.Sprintf(query, mailUsername))
 
-	user, err = map2User(u)
-	if err != nil {
+	user, err = map2User(u[0])
+
+	if err != nil || len(u) != 1 {
 		return User{}, err
 	}
 
@@ -70,12 +76,15 @@ func GetUserByMail(mailUsername string) (user User, err error) {
 func UserExist(mailUsername string) bool {
 	query := `{
 		"selector": {
-			 "type": "User",
+			 "type": "user",
 			 "mail": "%s"
 		}
 	}`
-	u, _ := flashlightDB.QueryJSON(fmt.Sprintf(query, mailUsername))
-	if len(u) >= 1 {
+	u, err := flashlightDB.QueryJSON(fmt.Sprintf(query, mailUsername))
+	if err != nil {
+		return false
+	}
+	if len(u) < 1 {
 		return false
 	}
 	return true
@@ -83,9 +92,12 @@ func UserExist(mailUsername string) bool {
 
 func CheckPassword(username, pw string) bool {
 	user, err := GetUserByMail(username)
+	if err != nil {
+		return false
+	}
 	passwordDB, _ := base64.StdEncoding.DecodeString(user.Password)
 	err = bcrypt.CompareHashAndPassword(passwordDB, []byte(pw))
-	if err != nil {
+	if err == nil {
 		return true
 	} else {
 		return false
@@ -95,16 +107,17 @@ func CheckPassword(username, pw string) bool {
 /* Converts Mail to Usernamr : E.G Bylat93 -> [Bylat93]@examplemail.com
  */
 func MailToUsername(mail string) string {
-	//TODO
-	return ""
+	user := strings.Split(mail, "@")
+	return user[0]
 }
 
 /*-------Helper Function--------*/
 
 // Convert from map[string]interface{} to User Struct as required by golang-couchdb method
-func map2User(user []map[string]interface{}) (u User, err error) {
+func map2User(user map[string]interface{}) (u User, err error) {
 	uJSON, err := json.Marshal(user)
 	json.Unmarshal(uJSON, &u)
+
 	return u, err
 }
 

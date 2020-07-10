@@ -29,15 +29,25 @@ func Index(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			log.Println(err)
 		}
-
+		u := session.Values["username"].(string)
+		user, _ := model.GetUserByMail(u)
 		allPosts, _ := model.GetAllPosts()
 
 		loggedData := struct {
 			Posts []map[string]interface{}
+			User  model.User
 		}{
 			Posts: allPosts,
+			User:  user,
 		}
 		t.ExecuteTemplate(w, "layout", loggedData)
 	}
+}
 
+func SendComment(w http.ResponseWriter, r *http.Request) {
+	//TODO
+}
+
+func Like(w http.ResponseWriter, r *http.Request) {
+	//TODO
 }

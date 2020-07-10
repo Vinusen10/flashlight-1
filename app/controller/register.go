@@ -7,11 +7,6 @@ import (
 	"net/http"
 )
 
-type User struct {
-	Name     string
-	Password string
-}
-
 func RegisterPage(w http.ResponseWriter, r *http.Request) {
 
 	t, err := template.ParseFiles("template/index-register.html", "template/components/register.html")
@@ -26,7 +21,7 @@ func RegisterProcess(w http.ResponseWriter, r *http.Request) {
 	usermail := r.FormValue("username")
 	password := r.FormValue("password")
 
-	if model.UserExist(usermail) != true {
+	if model.UserExist(usermail) == true {
 		t, err := template.ParseFiles("template/index-register.html", "template/components/register.html")
 		if err != nil {
 			log.Println(err)
@@ -43,6 +38,11 @@ func RegisterProcess(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			log.Println(err)
 		}
+		session, _ := store.Get(r, "session")
+
+		session.Values["authenticated"] = true
+		session.Values["username"] = usermail
+		session.Save(r, w)
 		http.Redirect(w, r, "/", http.StatusFound)
 	}
 

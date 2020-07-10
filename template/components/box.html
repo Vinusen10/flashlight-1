@@ -1,32 +1,37 @@
 {{define "content-box"}}
-{{range .Posts}}
-<div class="container-fluid d-flex justify-content-center mt-4 mb-4">
-    <div class="card" style="width:36rem">
-        <div class="card-header" style="background-color:white">
-            <div class="row">
-                <div class="col-lg-9 col-md-4">
-                    <div class="card-text"><strong class="text-muted">{{.author}}</strong></div>
-                    <div class="card-text"><small class="text-muted">{{.timestamp}}</small></div>
+    {{range .Posts}}
+        <div class="container-fluid d-flex justify-content-center mt-4 mb-4">
+            <div class="card" style="width:36rem">
+                <div class="card-header" style="background-color:white">
+                    <div class="row">
+                        <div class="col-lg-9 col-md-4">
+                            <div class="card-text"><strong class="text-muted">{{.author}}</strong></div>
+                            <div class="card-text"><small class="text-muted">{{.timestamp}}</small></div>
+                        </div>
+                    </div>
+                </div>
+
+                <img src='{{.imgpath}}' class="card-img-top" alt="...">
+
+                <div class="card-body">
+                    {{$number := len .likes}}
+                    {{if eq $number 0}}
+                        <div><p><strong>Gefällt {{len .likes}} Leuten </strong></p></div>
+                    {{else}}
+                    {{end}}
+                    <div>
+                        <p>{{.caption}}</p>
+                    </div>
+                </div>
+                <div class="card-footer" style="background-color:white">
+                    {{range .comments}}
+                        <div>
+                            <section class="m-2"><strong class="padding-left:2px">{{.user}}</strong> {{.comment}}
+                            </section>
+                        </div>
+                    {{end}}
                 </div>
             </div>
         </div>
-
-        <img src='{{.imgpath}}' class="card-img-top" alt="...">
-
-        <div class="card-body">
-            <div><p><strong>Gefällt {{ len .likes}} Leuten</strong></p></div>
-            <div>
-                <p>{{.caption}}</p>
-            </div>
-        </div>
-        <div class="card-footer" style="background-color:white">
-            {{range .comments}}
-            <div><section class="m-2"><strong class="padding-left:2px">{{.user}}</strong> {{.comment}}
-                </section>
-            </div>
-            {{end}}
-        </div>
-    </div>
-</div>
-{{end}}
+    {{end}}
 {{end}}

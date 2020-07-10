@@ -4,25 +4,46 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/leesper/couchdb-golang"
+	"log"
 )
 
 type Post struct {
-	ID        string   `json:"_id"`
-	Rev       string   `json:"_rev"`
-	Type      string   `json:"type"`
-	Author    string   `json:"author"`
-	Timestamp string   `json:"timestamp"`
-	Likes     []string `json:"likes"`
-	Caption   string   `json:"caption"`
-	Comments  []string `json:"comments"`
-	ImagPath  string   `json:"imgpath"`
+	ID        string    `json:"_id"`
+	Rev       string    `json:"_rev"`
+	Type      string    `json:"type"`
+	Author    string    `json:"author"`
+	Timestamp string    `json:"timestamp"`
+	Likes     []string  `json:"likes"`
+	Caption   string    `json:"caption"`
+	Comments  []Comment `json:"comments"`
+	ImagPath  string    `json:"imgpath"`
 
 	couchdb.Document
 }
 
-//TODO
-func AddPost() {
+type Comment struct {
+	User    string `json:"user"`
+	Comment string `json:"comment"`
+}
 
+//TODO
+func (p Post) AddPost() (err error) {
+
+	p.Type = "post"
+
+	newPost, err := post2map(p)
+	if err != nil {
+		log.Println(err)
+	}
+	delete(newPost, "_id")
+	delete(newPost, "_rev")
+
+	_, _, errr := flashlightDB.Save(newPost, nil)
+
+	if errr != nil {
+		log.Println("[Add] error: %s", errr)
+	}
+	return err
 }
 
 func GetAllPosts() ([]map[string]interface{}, error) {
@@ -41,7 +62,6 @@ func GetAllPosts() ([]map[string]interface{}, error) {
 }
 
 func GetPostsbyUser(user string) ([]map[string]interface{}, error) {
-
 	query := `{
    "selector": {
       "type": "post",
@@ -52,9 +72,28 @@ func GetPostsbyUser(user string) ([]map[string]interface{}, error) {
 	return userPost, err
 }
 
+func GetPostByID(id string) (Post, error) {
+	t, err := flashlightDB.Get(id, nil)
+	if err != nil {
+		return Post{}, err
+	}
+
+	userPost := Post{
+		ID:   t["_id"].(string),
+		Rev:  t["_rev"].(string),
+		Type: t["type"].(string),
+	}
+
+	return userPost, err
+}
+func (p Post) Delete() error {
+	err := flashlightDB.Delete(p.ID)
+	return err
+}
+
 func AppendComment(id, comment, user string) {
 }
-func AppendLike() {
+func Like() {
 
 }
 func AppendDislike(user string) {

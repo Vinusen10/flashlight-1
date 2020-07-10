@@ -2,14 +2,14 @@
 {{range .MyPosts}}
 
     <div class="card">
-        <form id="" action="/logged" method="post">
+        <form action="/deletePicture?data={{._id}}" method="post">
             <div class="card-header" style="background-color:white">
                 <ul class="list-inline text-center text-muted mt-n1 mb-n1">
                     <li class="list-inline-item"><small>{{.timestamp}}</small></li>
                 </ul>
 
             </div>
-            <img class="card-img" src="{{.imgpath}}" alt="Card image cap" >
+            <img class="card-img" src="{{.imgpath}}" alt="Card image cap">
 
             <div class="card-body">
                 <ul class="list-inline text-center mb-n1 ">

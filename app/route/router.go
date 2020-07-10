@@ -2,7 +2,6 @@ package route
 
 import (
 	"flashlight/app/controller"
-	"flashlight/app/middleware"
 	"github.com/gorilla/mux"
 	"net/http"
 )
@@ -11,28 +10,22 @@ import (
 func GetRouter() *mux.Router {
 	r := mux.NewRouter()
 
-	//controllers for authenticated Users
 	r.HandleFunc("/", controller.Index).Methods("GET")
 	r.HandleFunc("/gallery", controller.Gallery).Methods("GET")
 	r.HandleFunc("/uploads", controller.Upload).Methods("GET")
-
-	//controllers for public
+	r.HandleFunc("/authenticate", controller.AuthenticateUser)
 	r.HandleFunc("/login", controller.Login).Methods("GET")
 	r.HandleFunc("/register", controller.RegisterPage).Methods("GET")
 	r.HandleFunc("/registerProcess", controller.RegisterProcess).Methods("POST")
-	r.HandleFunc("/authenticate", controller.AuthenticateUser)
+	r.HandleFunc("/logout", controller.Logout).Methods("GET")
 
-	//Logout
-	r.HandleFunc("/logout", middleware.DeAuth(controller.Logout))
-
-	//"REST" "Controller for Sending, Liking, Deleting Posts,Uploading
-	r.HandleFunc("/sendComment", middleware.Auth(controller.SendComment)).Methods("POST")
-	r.HandleFunc("/like", nil).Methods("POST")
-	r.HandleFunc("/deletePicture", middleware.Auth(controller.DeletePicture)).Methods("POST")
-	r.HandleFunc("/uploading", middleware.Auth(controller.Uploading)).Methods("POST")
+	// Controller for Interactions
+	r.HandleFunc("/sendComment", controller.Auth(controller.SendComment)).Methods("POST")
+	r.HandleFunc("/like", nil).Methods("POST").Methods("POST")
+	r.HandleFunc("/deletePicture", controller.Auth(controller.DeletePicture))
+	r.HandleFunc("/uploading", controller.Auth(controller.Uploading)).Methods("POST")
 
 	/*File Server & CND */
-
 	//statics
 	r.PathPrefix("/static/").Handler(http.StripPrefix("/static", http.FileServer(http.Dir("./static/"))))
 	//See all files on server

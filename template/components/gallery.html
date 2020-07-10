@@ -1,15 +1,15 @@
 {{define "content-gallery"}}
     <div class="container mt-4">
         <div class="row mt-1">
-            <div class="col-md-auto offset-md-3"><strong><h3>E_Mail-123</h3></strong></div>
+            <div class="col-md-auto offset-md-3"><strong><h3>{{.User.Mail}}</h3></strong></div>
         </div>
         <div class="row mt-1 mb-4">
             <div class="col-md-auto offset-md-3">Hier kannst du deine eigene Bilder sehen und löschen.</div>
         </div>
         <div class="container">
             <div class="row justify-content-md-center">
-                <div class="card-columns"  >
-                   {{template "card-layout" .}}
+                <div class="card-columns">
+                    {{template "card-layout" .}}
                 </div>
             </div>
         </div>
