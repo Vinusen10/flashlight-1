@@ -50,22 +50,22 @@
                 </div>
                 <div class="card-footer" style="background-color:white">
                     <div>
-                        <form action="/sendComment" method="post">
+                        <form action="/sendComment?data={{._id}}" method="post" id='{{._id}}'>
                             <div class="form-row">
                                 <div class="col">
-                                    <input type="text" name="comment" class="form-control" placeholder="Kommentieren">
+                                    <input name="comment" type="text" name="comment" class="form-control" placeholder="Kommentieren">
                                 </div>
                                 <div class="col-auto">
                                     <button type="submit" class="btn btn-dark btn-block btn-lg">
-                                    <i class="fa fa-paper-plane" aria-hidden="true"></i>
-                                </button>
+                                        <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     {{end}}
     <script>
         function toggleLikeButton(buttonId) {

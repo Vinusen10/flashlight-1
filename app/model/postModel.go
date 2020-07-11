@@ -92,11 +92,29 @@ func (p Post) Delete() error {
 }
 
 func AppendComment(id, comment, user string) {
-}
-func Like() {
+	// Get the Post with id
+	post, err := flashlightDB.Get(id, nil)
+	if err != nil {
+		log.Println(err)
+	}
+	// Append the comment to json field comments[]
+	newPost, err := map2post(post)
+	if err != nil {
+		log.Println(err)
+	}
+	appendPost := Comment{
+		User:    user,
+		Comment: comment,
+	}
+	newPost.Comments = append(newPost.Comments, appendPost)
+	tmp, _ := post2map(newPost)
+	flashlightDB.Set(id, tmp)
 
 }
-func AppendDislike(user string) {
+func Like(id, username string) {
+
+}
+func Dislike(id, username string) {
 
 }
 

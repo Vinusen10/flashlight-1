@@ -2,6 +2,7 @@ package controller
 
 import (
 	"flashlight/app/model"
+	"fmt"
 	"html/template"
 	"log"
 	"net/http"
@@ -45,7 +46,17 @@ func Index(w http.ResponseWriter, r *http.Request) {
 }
 
 func SendComment(w http.ResponseWriter, r *http.Request) {
-	//TODO
+	session, _ := store.Get(r, "session")
+
+	user := session.Values["username"].(string)
+	comment := r.FormValue("comment")
+	id := r.FormValue("data")
+	fmt.Println(id)
+	fmt.Println(user)
+	fmt.Println(comment)
+	model.AppendComment(id, comment, user)
+
+	http.Redirect(w, r, "/#"+id, http.StatusFound)
 }
 
 func Like(w http.ResponseWriter, r *http.Request) {
