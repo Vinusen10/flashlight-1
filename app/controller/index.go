@@ -31,15 +31,18 @@ func Index(w http.ResponseWriter, r *http.Request) {
 			log.Println(err)
 		}
 		u := session.Values["username"].(string)
+
 		user, _ := model.GetUserByMail(u)
 		allPosts, _ := model.GetAllPosts()
 
 		loggedData := struct {
-			Posts []map[string]interface{}
-			User  model.User
+			Posts    []map[string]interface{}
+			User     model.User
+			Username string
 		}{
-			Posts: allPosts,
-			User:  user,
+			Posts:    allPosts,
+			User:     user,
+			Username: u,
 		}
 		t.ExecuteTemplate(w, "layout", loggedData)
 	}
@@ -60,5 +63,9 @@ func SendComment(w http.ResponseWriter, r *http.Request) {
 }
 
 func Like(w http.ResponseWriter, r *http.Request) {
-	//TODO
+	session, _ := store.Get(r, "session")
+	user := session.Values["username"].(string)
+	id := r.FormValue("id")
+	model.Like(id, user)
+	http.Redirect(w, r, "/", http.StatusFound)
 }

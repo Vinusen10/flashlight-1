@@ -2,6 +2,7 @@ package model
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"github.com/leesper/couchdb-golang"
 	"log"
@@ -111,11 +112,52 @@ func AppendComment(id, comment, user string) {
 	flashlightDB.Set(id, tmp)
 
 }
-func Like(id, username string) {
+func Like(id, username string) error {
+	post, err := flashlightDB.Get(id, nil)
+	if err != nil {
+		log.Println(err)
+		return err
+	}
+	newPost, err := map2post(post)
+	if err != nil {
+		log.Println(err)
+		return err
+	}
+	for _, like := range newPost.Likes {
+		if like == username {
+			err = dislike(id, username, newPost)
+			if err != nil {
+				return err
+			} else {
+				return nil
+			}
 
+		}
+	}
+	newPost.Likes = append(newPost.Likes, username)
+	tmp, _ := post2map(newPost)
+	err = flashlightDB.Set(id, tmp)
+	if err != nil {
+		log.Println(err)
+		return err
+	}
+	return nil
 }
-func Dislike(id, username string) {
-
+func dislike(id, username string, newPost Post) error {
+	for i, like := range newPost.Likes {
+		if like == username {
+			newPost.Likes = append(newPost.Likes[:i], newPost.Likes[i+1:]...)
+			fmt.Println(newPost.Likes)
+			tmp, _ := post2map(newPost)
+			err := flashlightDB.Set(id, tmp)
+			if err != nil {
+				log.Println(err)
+				return err
+			}
+			return nil
+		}
+	}
+	return errors.New("Undefined Error - dislike")
 }
 
 /*-------Helper Function--------*/

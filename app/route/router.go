@@ -21,7 +21,7 @@ func GetRouter() *mux.Router {
 
 	// Controller for Interactions
 	r.HandleFunc("/sendComment", controller.Auth(controller.SendComment)).Methods("POST")
-	r.HandleFunc("/like", nil).Methods("POST").Methods("POST")
+	r.HandleFunc("/like", controller.Auth(controller.Like)).Methods("POST")
 	r.HandleFunc("/deletePicture", controller.Auth(controller.DeletePicture))
 	r.HandleFunc("/uploading", controller.Auth(controller.Uploading)).Methods("POST")
 
