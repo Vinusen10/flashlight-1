@@ -18,7 +18,12 @@ func Upload(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			log.Println(err)
 		}
-		t.ExecuteTemplate(w, "layout", nil)
+		uploadData := struct {
+			Username string
+		}{
+			Username: session.Values["username"].(string),
+		}
+		t.ExecuteTemplate(w, "layout", uploadData)
 	} else {
 		http.Redirect(w, r, "/", http.StatusNotFound)
 	}

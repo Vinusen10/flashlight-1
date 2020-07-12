@@ -25,16 +25,16 @@
                             <form method="post" action="/like?id={{._id}}">
                                 {{range $liked := .likes}}
                                     {{if eq  $liked $key}}
-                                        <button class="btn btn-outline-warning-toggle btn-lg btn-block" id="uniqueID" onclick="toggleLikeButton('uniqueID')" type="submit">
+                                        <button class="btn btn-outline-warning-toggle btn-lg btn-block" onclick="toggleLikeButton('uniqueID')" type="submit">
                                             <i class="fa fa-heart"></i>
                                         </button>
                                     {{else if ne $liked $key}}
-                                        <button class="btn btn-outline-warning btn-lg btn-block" id="uniqueID" onclick="toggleLikeButton('uniqueID')" type="submit">
+                                        <button class="btn btn-outline-warning btn-lg btn-block" onclick="toggleLikeButton('uniqueID')" type="submit">
                                             <i class="fa fa-heart"></i>
                                         </button>
                                     {{end}}
                                 {{else}}
-                                    <button class="btn btn-outline-warning btn-lg btn-block" id="uniqueID" onclick="toggleLikeButton('uniqueID')" type="submit">
+                                    <button class="btn btn-outline-warning btn-lg btn-block" onclick="toggleLikeButton('uniqueID')" type="submit">
                                         <i class="fa fa-heart"></i>
                                     </button>
                                 {{end}}
@@ -55,7 +55,7 @@
                         <p>{{.caption}}</p>
                     </div>
                 </div>
-                <div class="card-footer" style="background-color:white">
+                <div class="card-footer" style="background-color:white" id="{{._id}}">
                     {{range .comments}}
                         <div>
                             <section class="m-2"><strong class="padding-left:2px">{{.user}}</strong> {{.comment}}

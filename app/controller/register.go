@@ -26,7 +26,12 @@ func RegisterProcess(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			log.Println(err)
 		}
-		t.ExecuteTemplate(w, "layout", nil)
+		errorUser := struct {
+			ErrorMessage string
+		}{
+			ErrorMessage: "User already exists",
+		}
+		t.ExecuteTemplate(w, "layout", errorUser)
 	} else {
 		username := model.MailToUsername(usermail)
 		u := model.User{}

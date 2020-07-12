@@ -7,6 +7,9 @@
             <div class="form-group">
                 <input name="username" type="text" class="form-control form-control-small " id="username" placeholder="Benutzername" style="border-color:#feba2e">
             </div>
+            {{if .ErrorMessage}}
+                <div class="alert alert-danger" role="alert">{{.ErrorMessage}}</div>
+            {{end}}
             <div class="form-group">
                 <input type="password" onkeyup="check()" name="password" id="password" class="form-control form-control-small" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Ihr Passwort muss mindestens 8 Zeichen lang sein und mindestens ein Sonderzeichen oder eine Zahl enthalten. " required>
             </div>
@@ -17,7 +20,9 @@
             <div class="m-5">
                 <button type="submit" class="btn btn-warning btn-block" style="color:white">Register</button>
             </div>
+
         </form>
+
     </div>
     <script>
 

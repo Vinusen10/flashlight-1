@@ -29,22 +29,41 @@ func AuthenticateUser(w http.ResponseWriter, r *http.Request) {
 	username := r.FormValue("username")
 	password := r.FormValue("password")
 
-	check := model.CheckPassword(username, password)
+	checkPW := model.CheckPassword(username, password)
+	checkUser := model.UserExist(username)
 
-	if check == true {
+	if checkPW == true && checkUser == true {
 		session, _ := store.Get(r, "session")
+
 		// Set user as authenticated
 		session.Values["authenticated"] = true
 		session.Values["username"] = username
 		session.Save(r, w)
 		http.Redirect(w, r, "/", http.StatusFound)
-	} else {
+	} else if checkPW != true && checkUser == true {
 		t, err := template.ParseFiles("template/index-login.html", "template/components/login.html")
 		if err != nil {
 			log.Println(err)
 		}
-		t.ExecuteTemplate(w, "index-login.html", nil)
+		errorPW := struct {
+			ErrorMessage string
+		}{
+			ErrorMessage: "Password is not Valid.",
+		}
+		t.ExecuteTemplate(w, "layout", errorPW)
+	} else if checkUser != true {
+		t, err := template.ParseFiles("template/index-login.html", "template/components/login.html")
+		if err != nil {
+			log.Println(err)
+		}
+		errorUser := struct {
+			ErrorMessage string
+		}{
+			ErrorMessage: "User does not Exist",
+		}
+		t.ExecuteTemplate(w, "layout", errorUser)
 	}
+
 }
 func Logout(w http.ResponseWriter, r *http.Request) {
 	session, _ := store.Get(r, "session")

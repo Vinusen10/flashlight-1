@@ -63,11 +63,13 @@ func GetUserByMail(mailUsername string) (user User, err error) {
 		}
 	}`
 	u, err := flashlightDB.QueryJSON(fmt.Sprintf(query, mailUsername))
+	if err != nil || len(u) < 1 {
+		return User{}, err
+	}
 
 	user, err = map2User(u[0])
-
-	if err != nil || len(u) != 1 {
-		return User{}, err
+	if err != nil {
+		return user, err
 	}
 
 	return user, nil
@@ -84,7 +86,7 @@ func UserExist(mailUsername string) bool {
 	if err != nil {
 		return false
 	}
-	if len(u) < 1 {
+	if len(u) != 1 {
 		return false
 	}
 	return true
