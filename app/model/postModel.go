@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/leesper/couchdb-golang"
 	"log"
+	"time"
 )
 
 type Post struct {
@@ -27,8 +28,9 @@ type Comment struct {
 	Comment string `json:"comment"`
 }
 type Tstamp struct {
-	Date string `json:"date"`
-	Time string `json:"time"`
+	Date  string    `json:"date"`
+	Time  string    `json:"time"`
+	Stamp time.Time `json:"stamp"`
 }
 
 //TODO

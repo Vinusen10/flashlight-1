@@ -25,17 +25,16 @@
                         </div>
                         <div class="col-lg-3 col-md-1">
                             <form method="post" action="/like?id={{._id}}">
+                                {{$do := true}}
                                 {{range $liked := .likes}}
                                     {{if eq  $liked $key}}
+                                        {{$do = false}}
                                         <button class="btn btn-outline-warning-toggle btn-lg btn-block" onclick="toggleLikeButton('uniqueID')" type="submit">
                                             <i class="fa fa-heart"></i>
                                         </button>
-                                    {{else if ne $liked $key}}
-                                        <button class="btn btn-outline-warning btn-lg btn-block" onclick="toggleLikeButton('uniqueID')" type="submit">
-                                            <i class="fa fa-heart"></i>
-                                        </button>
                                     {{end}}
-                                {{else}}
+                                {{end}}
+                                {{if $do}}
                                     <button class="btn btn-outline-warning btn-lg btn-block" onclick="toggleLikeButton('uniqueID')" type="submit">
                                         <i class="fa fa-heart"></i>
                                     </button>
@@ -58,6 +57,10 @@
                     </div>
                 </div>
                 <div class="card-footer" style="background-color:white" id="{{._id}}">
+                    {{ $lengthComments := len .comments}}
+                    {{if eq $lengthComments 0}}
+                        <i>Keine Kommentare</i>
+                    {{end}}
                     {{range .comments}}
                         <div>
                             <section class="m-2"><strong class="padding-left:2px">{{.user}}</strong> {{.comment}}

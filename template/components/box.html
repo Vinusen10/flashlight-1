@@ -26,6 +26,10 @@
                     </div>
                 </div>
                 <div class="card-footer" style="background-color:white">
+                    {{ $lengthComments := len .comments}}
+                    {{if eq $lengthComments 0}}
+                        <i>Keine Kommentare</i>
+                    {{end}}
                     {{range .comments}}
                         <div>
                             <section class="m-2"><strong class="padding-left:2px">{{.user}}</strong> {{.comment}}
