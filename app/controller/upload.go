@@ -64,7 +64,9 @@ func Uploading(w http.ResponseWriter, r *http.Request) {
 	post.Caption = caption
 	post.Author = session.Values["username"].(string)
 	post.ImagPath = tempFile.Name()
-	post.Timestamp = time.Now().Format("Jan 2 15:04:05")
+	post.Timestamp.Date = time.Now().Format("2006-01-02")
+	post.Timestamp.Time = time.Now().Format("15:04")
+	fmt.Println(post.Timestamp)
 	post.Likes = []string{}
 	post.Comments = []model.Comment{}
 	post.AddPost()

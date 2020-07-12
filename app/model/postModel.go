@@ -13,7 +13,7 @@ type Post struct {
 	Rev       string    `json:"_rev"`
 	Type      string    `json:"type"`
 	Author    string    `json:"author"`
-	Timestamp string    `json:"timestamp"`
+	Timestamp Tstamp    `json:"timestamp"`
 	Likes     []string  `json:"likes"`
 	Caption   string    `json:"caption"`
 	Comments  []Comment `json:"comments"`
@@ -25,6 +25,10 @@ type Post struct {
 type Comment struct {
 	User    string `json:"user"`
 	Comment string `json:"comment"`
+}
+type Tstamp struct {
+	Date string `json:"date"`
+	Time string `json:"time"`
 }
 
 //TODO
