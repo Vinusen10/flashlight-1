@@ -13,7 +13,10 @@ import (
 func Upload(w http.ResponseWriter, r *http.Request) {
 
 	session, _ := store.Get(r, "session")
-	if session.Values["authenticated"] != nil {
+	fmt.Println(session.Values["authenticated"])
+	if auth, ok := session.Values["authenticated"].(bool); !ok || !auth {
+		http.Redirect(w, r, "/", http.StatusNotFound)
+	} else {
 		t, err := template.ParseFiles("template/index-upload.html", "template/components/upload.html")
 		if err != nil {
 			log.Println(err)
@@ -24,8 +27,6 @@ func Upload(w http.ResponseWriter, r *http.Request) {
 			Username: session.Values["username"].(string),
 		}
 		t.ExecuteTemplate(w, "layout", uploadData)
-	} else {
-		http.Redirect(w, r, "/", http.StatusNotFound)
 	}
 
 }

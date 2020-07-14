@@ -10,7 +10,11 @@ import (
 
 func Gallery(w http.ResponseWriter, r *http.Request) {
 	session, _ := store.Get(r, "session")
-	if session.Values["authenticated"] != nil {
+
+	if auth, ok := session.Values["authenticated"].(bool); !ok || !auth {
+		http.Redirect(w, r, "/", http.StatusNotFound)
+
+	} else {
 		t, err := template.ParseFiles("template/index-gallrey.html", "template/components/gallery.html", "template/components/card.html")
 		if err != nil {
 			log.Println(err)
@@ -26,8 +30,6 @@ func Gallery(w http.ResponseWriter, r *http.Request) {
 			User:    user,
 		}
 		t.ExecuteTemplate(w, "layout", gallery)
-	} else {
-		http.Redirect(w, r, "/", http.StatusNotFound)
 	}
 
 }

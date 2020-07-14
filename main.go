@@ -13,7 +13,7 @@ func main() {
 	r := route.GetRouter()
 	server := &http.Server{
 		Handler:      r,
-		Addr:         "localhost:8000",
+		Addr:         ":80",
 		WriteTimeout: 15 * time.Second,
 		ReadTimeout:  15 * time.Second,
 	}
