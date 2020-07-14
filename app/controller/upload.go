@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"strings"
 	"time"
 )
 
@@ -64,7 +65,8 @@ func Uploading(w http.ResponseWriter, r *http.Request) {
 	post := model.Post{}
 	post.Caption = caption
 	post.Author = session.Values["username"].(string)
-	post.ImagPath = tempFile.Name()
+	imagePath := strings.Replace(tempFile.Name(), "\\", "/", -1)
+	post.ImagPath = imagePath
 	post.Timestamp.Date = time.Now().Format("2006-01-02")
 	post.Timestamp.Time = time.Now().Format("15:04")
 	post.Timestamp.Stamp = time.Now()

@@ -54,20 +54,29 @@ func (p Post) AddPost() (err error) {
 }
 
 func GetAllPosts() ([]map[string]interface{}, error) {
+	/* 	query := `{
+	   "selector": {
+	      "type": "post",
+	      "timestamp.stamp": {
+	         "$gte": null
+	      }
+	   },
+	   "sort": [
+	      {
+	         "timestamp": "desc"
+	      }
+	   ]
+	}
+	` */
+
 	query := `{
-   "selector": {
-      "type": "post",
-      "timestamp.stamp": {
-         "$gte": null
-      }
-   },
-   "sort": [
-      {
-         "timestamp": "desc"
-      }
-   ]
-}
-`
+		"selector": {
+		   "type": {
+			  "$eq": "post"
+		   }
+		}
+	 }`
+
 	allPosts, err := flashlightDB.QueryJSON(query)
 	if err != nil {
 		return nil, err
